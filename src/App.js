@@ -1,24 +1,45 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
-
+import Header from './components/Header'
+import Search from './components/Search'
+import Manga from './components/Manga';
+import Anime from './components/Anime';
+import Footer from './components/Footer';
+const _ = require('lodash');
 function App() {
+  const [mangaStatus,setMangaStatus]=useState(0)
+  const [animeStatus, setAnimeStatus] = useState(0)
+  const [mangaObj,setMangaObj]=useState({})
+  const[animeObj, setAnimeObj] = useState({})
+
+  const queryResultHandler=(result)=>{
+  const [manga,anime] =result
+  if(!_.isEmpty(manga)){
+    setMangaStatus(1)
+    setMangaObj(manga)
+  }
+  else{
+    setMangaStatus(-1)
+  }
+  if(!_.isEmpty(anime)){
+    
+    setAnimeStatus(1)
+    setAnimeObj(anime)
+  }
+  else{
+    setAnimeStatus(-1)
+  }
+  
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <Search resultHandler={queryResultHandler}/>
+      <Manga obj={mangaObj} status={mangaStatus}/>
+      <Anime obj={animeObj} status={animeStatus}/>
+      <Footer/>
+    </>
   );
 }
 

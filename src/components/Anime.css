@@ -1,0 +1,7 @@
+#anime {
+    grid-area: anime;
+    background-color: rgb(25, 25, 25);
+    opacity: 90%;
+    font-size: 20px;
+    border-bottom: 1px solid white;
+}

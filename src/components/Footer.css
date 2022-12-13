@@ -1,0 +1,31 @@
+footer {
+    grid-area: footer;
+    background-color: rgb(25, 25, 25);
+    display: block;
+}
+
+footer ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    column-gap: 1.5rem;
+}
+
+.twitter {
+    color: #1DA1F2;
+}
+
+.linkdein {
+    color: #0077B5
+}
+
+.cc_container {
+    width: 100%;
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 0;
+}
+
+small {
+    font-size: 14px;
+}

@@ -1,13 +1,109 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+  box-sizing: border-box;
+  padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+  
+#root{
+  font-family: 'Roboto', sans-serif;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr 1fr auto;
+    grid-template-areas:
+      'header header'
+      'search search'
+      'manga anime'
+      'footer footer'
+    ;
+    background-image: url('./thumb-1920-973967.jpg');
+    color: white;
+    min-width: 350px;
+  }
+
+header,
+#search,
+#manga,
+#anime,
+footer {
+  padding: 20px;
+
+}
+
+
+img {
+  width: 200px;
+  height: 300px;
+}
+
+h2 {
+  text-align: center;
+
+}
+
+h3 {
+  font-size: 24px;
+}
+
+
+.container {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.status-container {
+  margin-left: 10%;
+  margin-top: 2%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media(max-width:768px) {
+  #root {
+    grid-template-areas:
+      'header header'
+      'search search'
+      'manga manga'
+      'anime anime'
+      'footer footer'
+    ;
+    grid-template-rows: 10vh 1fr 1fr 1fr auto;
+  }
+
+}
+@media (max-width:1200px) {
+  .container {
+    display: block;
+  }
+
+  #manga img,
+  #anime img {
+    margin: 1rem auto;
+  }
+
+  .img-container {
+
+    text-align: center;
+  }
+
 }

@@ -1,0 +1,14 @@
+header {
+    grid-area: header;
+    display: flex;
+    padding: 0;
+    padding-left: 1rem;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: rgb(25, 25, 25);
+}
+
+header img {
+    width: 40px;
+    height: 40px;
+}
