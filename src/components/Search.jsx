@@ -12,12 +12,11 @@ const normaliseString = (str1, str2) => {
     return [str3, str4]
 }
 const validator = (str1, str2) => {
-   let str3 = str1.replace(/\s/g, '').toLowerCase()
-   let str4 = str2.replace(/\s/g, '').toLowerCase()
-    console.log(str3)
-    console.log(str4)
+    let str3 = str1.replace(/\s/g, '').toLowerCase()
+    let str4 = str2.replace(/\s/g, '').toLowerCase()
+
     if (str4.includes(str3) || str3.includes(str4)) {
-        console.log('yes')
+
         return true;
     }
     return false;
@@ -33,20 +32,69 @@ const Search = (props) => {
         setSearchValue('')
     }
     async function search(queryResultHandler) {
-        const resIdFetch = await fetch(`https://api.consumet.org/manga/mangadex/${searchValue}`)
-        const jsonId = await resIdFetch.json()
-        const id = jsonId.results[0].id
+        let mangaObj = {}
+        let animeObj = {}
+        let jsonId;
+        let id;
+        try {
+            const resIdFetch = await fetch(`https://api.consumet.org/manga/mangadex/${searchValue}`)
+            jsonId = await resIdFetch.json()
+            id = jsonId.results[0].id
+        }
+        catch (err) {
+            console.log(err)
+            mangaObj = {}
+            animeObj = {}
+            queryResultHandler([mangaObj, animeObj])
+            return;
+        }
+
+
+
+        console.log(id)
         const mangaTitle = jsonId.results[0].title
         let mangaDescription = jsonId.results[0].description
         const mangaStatus = jsonId.results[0].status
-        const currentChapterFetch = await fetch(`https://api.mangadex.org/chapter?manga=${id}&translatedLanguage[]=en&order[volume]=desc&order[chapter]=desc`)
-        const currenChapterJson = await currentChapterFetch.json()
-        const currentChapterId = currenChapterJson.data[0].id
+        let currenChapterJson;
+        let currentChapterId;
+        try {
+            const currentChapterFetch = await fetch(`https://api.mangadex.org/chapter?manga=${id}&translatedLanguage[]=en&order[volume]=desc&order[chapter]=desc`)
+            currenChapterJson = await currentChapterFetch.json()
+            currentChapterId = currenChapterJson.data[0].id
+        }
+        catch (err) {
+            console.log(err)
+            mangaObj = {}
+            animeObj = {}
+            queryResultHandler([mangaObj, animeObj])
+            return;
+        }
+        let animeTitle;
+
         const currenChapterNum = currenChapterJson.data[0].attributes.chapter
+
         const currentChapterLink = `https://mangadex.org/chapter/${currentChapterId}`
-        const animeFetch = await fetch(`https://api.consumet.org/anime/enime/${searchValue}`)
-        const animeJson = await animeFetch.json()
-        const animeTitle = animeJson.results[0].title
+        let animeFetch;
+        let animeJson;
+        try {
+            animeFetch = await fetch(`https://api.consumet.org/anime/enime/${searchValue}`)
+            animeJson = await animeFetch.json()
+            animeTitle = animeJson.results[0].title
+        }
+        catch (err) {
+            console.log(err)
+            mangaObj = {
+                'title': mangaTitle,
+                'description': mangaDescription,
+                'status': mangaStatus,
+                'chap': currenChapterNum,
+                'link': currentChapterLink,
+                'img': null
+            }
+            animeObj = {}
+            queryResultHandler([mangaObj, animeObj])
+            return;
+        }
         const mangaImageUrl = animeJson.results[0].image
         const animeImageUrl = animeJson.results[0].cover
         const officialName = animeJson.results[0].title
@@ -57,7 +105,7 @@ const Search = (props) => {
         const normalDescription = normaliseString(mangaDescription, animeDescription)
         mangaDescription = normalDescription[0]
         animeDescription = normalDescription[1]
-        let mangaObj = {
+        mangaObj = {
             'title': mangaTitle,
             'description': mangaDescription,
             'status': mangaStatus,
@@ -66,7 +114,7 @@ const Search = (props) => {
             'img': mangaImageUrl
         }
 
-        let animeObj = {
+        animeObj = {
             'title': animeTitle,
             'description': animeDescription,
             'status': animeStatus,
