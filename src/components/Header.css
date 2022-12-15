@@ -1,7 +1,8 @@
 header {
     grid-area: header;
     display: flex;
-    padding: 0;
+    padding-top: 15px;
+    padding-bottom: 15px;
     padding-left: 1rem;
     align-items: center;
     gap: 0.5rem;

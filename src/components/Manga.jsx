@@ -5,6 +5,7 @@ const Manga = (props) => {
     if (props.status === 1)
         return (
             <section id="manga">
+                <h2 className='heading'>MANGA</h2>
                 <h2>{props.obj.title}</h2>
                 <div class="container">
                     <div class="img-container">
@@ -24,6 +25,7 @@ const Manga = (props) => {
     else if (props.status === 0) {
         return (
             <section id="manga">
+                <h2 className='heading'>MANGA</h2>
                 <h2>No Item Searched</h2>
             </section>
         )
@@ -31,6 +33,7 @@ const Manga = (props) => {
     else {
         return (
             <section id="manga">
+                <h2 className='heading'>MANGA</h2>
                 <h2>No Results Found</h2>
             </section>
         )

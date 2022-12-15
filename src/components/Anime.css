@@ -4,4 +4,11 @@
     opacity: 90%;
     font-size: 20px;
     border-bottom: 1px solid white;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.heading {
+    text-decoration: underline;
+    text-align: center;
+    padding-bottom: 1rem;
 }

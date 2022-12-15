@@ -5,6 +5,7 @@ footer {
 }
 
 footer ul {
+    margin-top: 1rem;
     list-style: none;
     display: flex;
     justify-content: center;
