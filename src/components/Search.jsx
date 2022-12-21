@@ -37,7 +37,7 @@ const Search = (props) => {
         let jsonId;
         let id;
         try {
-            const resIdFetch = await fetch(`https://api.consumet.org/manga/mangadex/${searchValue}`)
+            const resIdFetch = await fetch(`https://api.consumet.org/manga/mangadex/${searchValue}`,{mode: "no-cors"})
             jsonId = await resIdFetch.json()
             id = jsonId.results[0].id
         }
@@ -58,7 +58,7 @@ const Search = (props) => {
         let currenChapterJson;
         let currentChapterId;
         try {
-            const currentChapterFetch = await fetch(`https://api.mangadex.org/chapter?manga=${id}&translatedLanguage[]=en&order[volume]=desc&order[chapter]=desc`)
+            const currentChapterFetch = await fetch(`https://api.mangadex.org/chapter?manga=${id}&translatedLanguage[]=en&order[volume]=desc&order[chapter]=desc`,{mode: "no-cors"})
             currenChapterJson = await currentChapterFetch.json()
             currentChapterId = currenChapterJson.data[0].id
         }
@@ -77,7 +77,7 @@ const Search = (props) => {
         let animeFetch;
         let animeJson;
         try {
-            animeFetch = await fetch(`https://api.consumet.org/anime/enime/${searchValue}`)
+            animeFetch = await fetch(`https://api.consumet.org/anime/enime/${searchValue}`,{mode: "no-cors"})
             animeJson = await animeFetch.json()
             animeTitle = animeJson.results[0].title
         }
